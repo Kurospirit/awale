@@ -46,8 +46,40 @@ public class IA
 		setScore(getScore() + value);
 	}
 
+	/**
+	 * Représente le tour de jeu de l'IA
+	 * 
+	 * @param plateau
+	 *            plateau de jeu actuel
+	 */
 	public void jouer(Plateau plateau)
 	{
+
+		// liste des coups à jouer : coup[0] = 1, coup[1] = 2 signifiera que
+		// l'on devra jouer la cellule 1 puis la 2
+		int[] coup = new int[profondeur];
+
+		for (int i = 0; i < profondeur; i++)
+			coup[i] = 0;
+
+		int value = 0;
+
+		// On teste les 6 cases de l'IA et on sauvegarde le coup qui nous
+		// rapporte le plus
+		for (int j = 0; j < 6; j++)
+		{
+			// tableau temporaire qui est une copie du plateau actuel
+			Plateau plateau2 = plateau;
+			// Valeur du gain en jouant la case j
+			int tmp = plateau2.jouerCoup(j, side);
+			// Si la valeur du gain est supérieure à la meilleure actuelle
+			// on la sauvegarde et on indique que le 1er coup sera de jouer j
+			if (tmp > value)
+			{
+				value = tmp;
+				coup[0] = j;
+			}
+		}
 
 	}
 
